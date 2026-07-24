@@ -40,9 +40,9 @@ public class TestController {
 
         try {
             // Intentionally broken query on non-existent table in testapp schema
-            // jdbcTemplate.execute("SELECT * FROM testapp.non_existent_table");
-            return "Working";
-        } catch (Exception e) {
+            jdbcTemplate.execute("SELECT * FROM testapp.non_existent_table");
+             
+            } catch (Exception e) {
             logger.error("Database table operation failed on testapp schema: {}", e.getMessage(), e);
             throw new RuntimeException("Service broke! Table operation failed in testapp schema: " + e.getMessage(), e);
         }
