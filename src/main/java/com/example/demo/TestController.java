@@ -49,4 +49,19 @@ public class TestController {
 
         return "Service broke!";
     }
+
+    @GetMapping("/working2/{name}")
+    public String working2( @org.springframework.web.bind.annotation.PathVariable String name) {
+        logger.info("Executing /working endpoint - saving and fetching items from testapp.items table");
+        
+        // Operation on testapp schema table
+        Item newItem = new Item(name, "SUCCESS");
+        // newItem.setName(name);
+        itemRepository.save(newItem);
+
+        Item item = itemRepository.findByName(name);
+
+
+        return "Saved item: " + item.getName() + " with ID: " + item.getId();
+    }
 }
